@@ -168,11 +168,59 @@ public class RetrofitClientInstance
 6. Define the Endpoints:Create New Interface name GetDataService
 
 ```
-public interface GetDataService {
+package com.muneiah.retrofitpractices1;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+
+public interface GetDataService
+{
     @GET("/photos")
-    Call<List<RetroPhoto>> getAllPhotos();
+    Call<List<Repo>> getAllPhotos();
 }
+
+7.Create layour resourse each_item_design.xml file like as 
+
 ```
-7. Create custom adapter for binding data with RecycleView.
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="2"
+    android:layout_weight="10"
+    android:layout_margin="10dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/textView_tv"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+</LinearLayout>
+
+
+```
+
+
+
+```
+8. Create custom adapter for binding data with RecycleView.
+* Create a class named MyAdapter.java under java directory first package like this.
+```
+
+
+```
+
+
 
