@@ -216,11 +216,166 @@ public interface GetDataService
 
 ```
 8. Create custom adapter for binding data with RecycleView.
-* Create a class named MyAdapter.java under java directory first package like this.
+* Create a class named **MyAdapter.java** under java directory first package like this.
+```
+package com.muneiah.retrofitpractices1;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.OkHttp3Downloader;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+     List<Repo> dataList;
+     Context context;
+     //constractor
+    public MyAdapter(List<Repo> dataList, Context context) {
+        this.dataList = dataList;
+        this.context = context;
+    }
+
+    @NonNull
+    @Override
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.each_item_design,parent,false);
+        return new MyViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.tvv_tit.setText(dataList.get(position).getTitle());
+        Picasso.Builder builder = new Picasso.Builder(context);
+        builder.downloader(new OkHttp3Downloader(context));
+        builder.build().load(dataList.get(position).getThumbnailUrl())
+                .placeholder((R.drawable.ic_launcher_background))
+                .error(R.drawable.ic_launcher_background)
+                .into(holder.iv_photho);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView iv_photho;
+        TextView tvv_tit;
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            iv_photho=itemView.findViewById(R.id.iv);
+            tvv_tit=itemView.findViewById(R.id.textView_tv);
+        }
+    }
+}
+
+
 ```
 
 
+8.Add the Recylerview Component in the activity_main.xml file just like as
+
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rec" />
+
+</LinearLayout>
+
 ```
 
+9. Final step
+* Inside the onCreate() method of the MainActivity.java, we initialize an instance of the GetDataService interface, the RecyclerView, and also the adapter. Finally, we call the generateDataList() method.
+
+```
+package com.muneiah.retrofitpractices1;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity {
+RecyclerView rv;
+MyAdapter adapter;
+ProgressDialog progressDialog;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        rv=findViewById(R.id.rec);
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
+        /*Create handle for the RetrofitInstance interface*/
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+
+        Call<List<Repo>> call = service.getAllPhotos();
+        call.enqueue(new Callback<List<Repo>>() {
+            @Override
+            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                progressDialog.dismiss();
+                generateDataList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Repo>> call, Throwable t) {
+                progressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    /*Method to generate List of data using RecyclerView with custom adapter*/
+    private void generateDataList(List<Repo> photoList) {
+        adapter = new MyAdapter(this,photoList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(adapter);
+    }
+}
+
+
+```
+
+
+
+10. Understanding enqueue()
+enqueue() asynchronously sends the request and notifies your app with a callback when a response comes back. Since this request is asynchronous, Retrofit handles it on a background thread so that the main UI thread isn't blocked or interfered with.
+
+	To use enqueue(), you have to implement two callback methods:
+	* onResponse()
+	* onFailure()
+**Run the Application**
 
 
