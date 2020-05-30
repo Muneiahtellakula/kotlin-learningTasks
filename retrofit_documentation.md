@@ -9,6 +9,15 @@
 2. Open **build.gradle in (Module:app)** and add **Retrofit, Picasso, RecyclerView, Gson dependencies** like this.
     * After adding below dependencies click on top right side corner **Sync Now** .Wait untill for successfull message came
 ``` xml
+//If app crash then only use below compileOption 
+android 
+{
+  compileOptions 
+	{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+  	}
+}
 
 dependencies 
 {
