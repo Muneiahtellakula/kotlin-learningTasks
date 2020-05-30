@@ -58,3 +58,121 @@ dependencies
 4. Next, we will create data model to parse our sample JSON data with following structure.[For Json Url](https://jsonplaceholder.typicode.com/photos)
 <img src="https://github.com/Muneiahtellakula/kotlin-learningTasks/blob/master/jsonplaceholder.png">
 
+ * Create a class named Repo.java under model package like this
+
+```Java
+package com.muneiah.retrofitpractices1;
+
+import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
+
+public class Repo implements Serializable {
+
+	@SerializedName("albumId")
+	private int albumId;
+
+	@SerializedName("id")
+	private int id;
+
+	@SerializedName("title")
+	private String title;
+
+	@SerializedName("url")
+	private String url;
+
+	@SerializedName("thumbnailUrl")
+	private String thumbnailUrl;
+
+	public void setAlbumId(int albumId){
+		this.albumId = albumId;
+	}
+
+	public int getAlbumId(){
+		return albumId;
+	}
+
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public int getId(){
+		return id;
+	}
+
+	public void setTitle(String title){
+		this.title = title;
+	}
+
+	public String getTitle(){
+		return title;
+	}
+
+	public void setUrl(String url){
+		this.url = url;
+	}
+
+	public String getUrl(){
+		return url;
+	}
+
+	public void setThumbnailUrl(String thumbnailUrl){
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
+	public String getThumbnailUrl(){
+		return thumbnailUrl;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Repo{" + 
+			"albumId = '" + albumId + '\'' + 
+			",id = '" + id + '\'' + 
+			",title = '" + title + '\'' + 
+			",url = '" + url + '\'' + 
+			",thumbnailUrl = '" + thumbnailUrl + '\'' + 
+			"}";
+		}
+}
+
+```
+
+5. Create the Retrofit Instance
+* To issue network requests to a REST API with Retrofit, we need to create an instance using the Retrofit.Builder class and configure it with a base URL.
+* Create a class **RetrofitClientInstance.java** under **network** package. Here **BASE_URL** is the basic URL of our API where we will make a call.
+
+```Java
+package com.muneiah.retrofitpractices1;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class RetrofitClientInstance 
+{
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://jsonplaceholder.typicode.com";
+
+    public static Retrofit getRetrofitInstance() {
+        if (retrofit == null) {
+            retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+}
+
+```
+6. Define the Endpoints:Create New Interface name GetDataService
+
+```
+public interface GetDataService {
+
+    @GET("/photos")
+    Call<List<RetroPhoto>> getAllPhotos();
+}
+```
+7. Create custom adapter for binding data with RecycleView.
+
