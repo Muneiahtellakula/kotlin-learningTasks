@@ -379,7 +379,7 @@ ProgressDialog progressDialog;
 
 
 
-10. Understanding enqueue()
+* Understanding enqueue()
 enqueue() asynchronously sends the request and notifies your app with a callback when a response comes back. Since this request is asynchronous, Retrofit handles it on a background thread so that the main UI thread isn't blocked or interfered with.
 
 	To use enqueue(), you have to implement two callback methods:
