@@ -389,4 +389,8 @@ enqueue() asynchronously sends the request and notifies your app with a callback
 	
 * **Run the Application**
 
+## Output Screen 
+
+<img src="https://github.com/Muneiahtellakula/kotlin-learningTasks/blob/master/20200531_130811-ANIMATION.gif">
+
 
