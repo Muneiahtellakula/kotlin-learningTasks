@@ -45,6 +45,43 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:118658778219:android:2afe84701ae7056dcf5d2e",
+        "android_client_info": {
+          "package_name": "com.muneiah.firebasefileuploading"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118658778219-234c395v2g8r9nmti096enj82efvgksv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muneiah.firebasefileuploading",
+            "certificate_hash": "c2b0a999272571a1f58f39079a48b59bd7d82675"
+          }
+        },
+        {
+          "client_id": "118658778219-n7ggi9u2jscr32g31ps60bsbdkb13p8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1h3FqxYrdqxPnIjLTBMsCmVXB34pweps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118658778219-n7ggi9u2jscr32g31ps60bsbdkb13p8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:118658778219:android:0d1dacbeb93732b0cf5d2e",
         "android_client_info": {
           "package_name": "com.muneiah.resetpassword"
