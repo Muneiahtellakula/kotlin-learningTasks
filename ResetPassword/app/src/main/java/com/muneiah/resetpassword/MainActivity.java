@@ -156,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
                     fileDoneList.add("uploading");
                     uploadListAdapter.notifyDataSetChanged();
 
-                    StorageReference fileToUpload = mStorageRef.child("Images").child(fileName);
+                    StorageReference fileToUpload = mStorageRef.child("Images")
+                            .child(fileName);
 
                     final int finalI = i;
                     fileToUpload.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

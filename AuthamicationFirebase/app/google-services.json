@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941250324921",
+    "project_id": "authamicationfirebase",
+    "storage_bucket": "authamicationfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941250324921:android:326c15e05061d4fde76e68",
+        "android_client_info": {
+          "package_name": "com.example.authamicationfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941250324921-npgflso1p6ocmfjtbkmld4dmim7nphrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl3IFF9zVHpc5MDSbKW0tZ655p_Qx6Hps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941250324921-npgflso1p6ocmfjtbkmld4dmim7nphrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
